@@ -2,6 +2,8 @@
 
 ![Kyo Sushi Logo](public/images/logo.png)
 
+Check out the website! -> https://bubbosvilup.github.io/Kyo_Sushi/
+
 ## 📑 Descrizione
 
 Kyo Sushi è un sito web per un ristorante fusion italo-giapponese situato nel cuore di Milano. Il sito è sviluppato con React e mette in risalto l'unicità del ristorante che combina la tradizione culinaria giapponese con ingredienti e sapori italiani di alta qualità.
