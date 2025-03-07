@@ -11,6 +11,7 @@ import Footer from "./components/Footer";
 import Preloader from "./components/Preloader";
 import "aos/dist/aos.css";
 import "./styles/App.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 function App() {
   const [loading, setLoading] = useState(true);

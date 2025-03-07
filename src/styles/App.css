@@ -9,12 +9,11 @@
   --bg-color: #ffffff;
   --bg-light-color: #f8f9fa;
   --border-color: #eeeeee;
+  --header-height: 80px;
 
-  /* Font */
   --heading-font: "Playfair Display", serif;
   --body-font: "Poppins", sans-serif;
 
-  /* Dimensioni */
   --container-width: 1200px;
   --header-height: 80px;
   --section-padding: 100px;
@@ -81,6 +80,10 @@ a:hover {
   color: var(--secondary-color);
 }
 
+main {
+  padding-top: var(--header-height);
+}
+
 img {
   max-width: 100%;
   height: auto;
@@ -104,6 +107,10 @@ button {
 .section-header {
   text-align: center;
   margin-bottom: 60px;
+}
+
+.app {
+  overflow-x: hidden;
 }
 
 .section-header h2 {

@@ -45,10 +45,24 @@
 }
 
 .nav-menu ul li a {
-  color: #fff;
+  color: #000000;
   font-weight: 500;
   font-size: 16px;
   transition: color 0.3s ease;
+}
+
+.nav-menu ul li a {
+  color: var(--text-color);
+  font-weight: 500;
+  font-size: 16px;
+  transition: color 0.3s ease;
+  cursor: default; /* Cursore normale quando non in hover */
+}
+
+.nav-menu ul li a:hover,
+.header.scrolled .nav-menu ul li a:hover {
+  color: var(--primary-color);
+  cursor: pointer; /* Cambia in puntatore quando in hover */
 }
 
 .header.scrolled .nav-menu ul li a {
