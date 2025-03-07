@@ -10,7 +10,7 @@ function Testimonials() {
       name: "Francesca Bianchi",
       role: "Cliente abituale",
       text: "Il miglior sushi che abbia mai provato a Milano. La fusione con ingredienti italiani è geniale e il servizio è impeccabile. Lo consiglio vivamente!",
-      image: "/images/testimonials/testimonial-1.jpg",
+      image: "images/testimonials/testimonial-1.jpg",
       rating: 5,
     },
     {
@@ -18,7 +18,7 @@ function Testimonials() {
       name: "Marco Verdi",
       role: "Food Blogger",
       text: "Kyo Sushi è un'autentica esperienza culinaria. I piatti sono presentati con cura e i sapori sono straordinari. Un locale che merita di essere scoperto.",
-      image: "/images/testimonials/testimonial-2.jpg",
+      image: "images/testimonials/testimonial-2.jpg",
       rating: 5,
     },
     {
@@ -26,7 +26,7 @@ function Testimonials() {
       name: "Alessandro Neri",
       role: "Chef",
       text: "Da professionista del settore, posso dire che la qualità del pesce è eccezionale e la tecnica di preparazione è impeccabile. Un posto che unisce tradizione e innovazione.",
-      image: "/images/testimonials/testimonial-3.jpg",
+      image: "images/testimonials/testimonial-3.jpg",
       rating: 4,
     },
   ];

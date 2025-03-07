@@ -17,7 +17,7 @@ function About() {
             data-aos-delay="200"
           >
             <div className="image-container">
-              <img src="/images/chef.jpg" alt="Chef Kyo Sushi" />
+              <img src="images/chef.jpg" alt="Chef Kyo Sushi" />
               <div className="image-overlay"></div>
             </div>
           </div>

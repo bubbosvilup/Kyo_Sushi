@@ -7,42 +7,42 @@ function Gallery() {
 
   const galleryImages = [
     {
-      src: "/images/gallery/gallery-1.jpg",
+      src: "images/gallery/gallery-1.jpg",
       alt: "Piatto di sushi misto",
       category: "Piatti",
     },
     {
-      src: "/images/gallery/gallery-2.jpg",
+      src: "images/gallery/gallery-2.jpg",
       alt: "Interno del ristorante",
       category: "Locale",
     },
     {
-      src: "/images/gallery/gallery-3.jpg",
+      src: "images/gallery/gallery-3.jpg",
       alt: "Chef al lavoro",
       category: "Cucina",
     },
     {
-      src: "/images/gallery/gallery-4.jpg",
+      src: "images/gallery/gallery-4.jpg",
       alt: "Selezione di sashimi",
       category: "Piatti",
     },
     {
-      src: "/images/gallery/gallery-5.jpg",
+      src: "images/gallery/gallery-5.jpg",
       alt: "Dettaglio bancone sushi",
       category: "Locale",
     },
     {
-      src: "/images/gallery/gallery-6.jpg",
+      src: "images/gallery/gallery-6.jpg",
       alt: "Sakè e piatti giapponesi",
       category: "Bevande",
     },
     {
-      src: "/images/gallery/gallery-7.jpg",
+      src: "images/gallery/gallery-7.jpg",
       alt: "Roll speciali",
       category: "Piatti",
     },
     {
-      src: "/images/gallery/gallery-8.jpg",
+      src: "images/gallery/gallery-8.jpg",
       alt: "Dessert giapponese",
       category: "Dolci",
     },
