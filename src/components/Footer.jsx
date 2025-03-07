@@ -113,6 +113,16 @@ function Footer() {
             <a href="#">Privacy Policy</a> |{" "}
             <a href="#">Termini e Condizioni</a>
           </p>
+          <p className="footer-credit">
+            Coded by:{" "}
+            <a
+              href="https://github.com/bubbosvilup"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span className="credit-link">Bubbo</span>
+            </a>
+          </p>
         </div>
       </div>
     </footer>

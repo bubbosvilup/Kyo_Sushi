@@ -181,3 +181,20 @@
     gap: 10px;
   }
 }
+
+.footer-credit {
+  text-align: center;
+  margin-top: 1rem;
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+.credit-link {
+  color: #ff9100;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.credit-link:hover {
+  color: #51ff00;
+}
