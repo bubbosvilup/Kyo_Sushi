@@ -1,5 +1,5 @@
 .testimonials {
-  background-color: var(--bg-light-color);
+  background-color: transparent;
   position: relative;
   overflow: hidden;
 }
