@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+  <!-- Sfondo chiaro -->
+  <rect width="40" height="40" fill="#f8f9fa"/>
+  <!-- Cerchio centrale con opacità per effetto sottile -->
+  <circle cx="20" cy="20" r="8" fill="#e94e1b" opacity="0.2"/>
+  <!-- Piccoli cerchietti per variare il pattern -->
+  <circle cx="10" cy="10" r="2" fill="#e94e1b" opacity="0.1"/>
+  <circle cx="30" cy="30" r="2" fill="#e94e1b" opacity="0.1"/>
+</svg>
