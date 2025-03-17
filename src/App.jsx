@@ -17,17 +17,26 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Configurazione migliorata per AOS
     AOS.init({
-      duration: 1000,
+      duration: 800,
+      easing: 'ease-out-cubic',
       once: false,
       mirror: true,
-      easing: "ease-in-out",
+      offset: 50,
+      delay: 0,
+      anchorPlacement: 'top-bottom',
     });
 
     // Simula il caricamento delle risorse
     setTimeout(() => {
       setLoading(false);
     }, 2000);
+
+    // Reinizializza AOS quando la finestra viene ridimensionata
+    window.addEventListener('resize', () => {
+      AOS.refresh();
+    });
   }, []);
 
   if (loading) {

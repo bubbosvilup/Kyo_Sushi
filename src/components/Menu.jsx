@@ -1,18 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/Menu.css";
 
 function Menu() {
-  const [activeCategory, setActiveCategory] = useState("sushi");
+  const [activeCategory, setActiveCategory] = useState("all");
+  const [filteredItems, setFilteredItems] = useState([]);
+  const [isAnimating, setIsAnimating] = useState(false);
 
-  const categories = [
-    { id: "sushi", name: "Sushi" },
-    { id: "sashimi", name: "Sashimi" },
-    { id: "rolls", name: "Rolls" },
-    { id: "specials", name: "Speciali" },
-    { id: "vegetarian", name: "Vegetariani" },
-  ];
-
-  const menuItems = {
+  const menuData = {
     sushi: [
       {
         id: 1,
@@ -121,13 +115,47 @@ function Menu() {
     ],
   };
 
+  const categories = [
+    { id: "all", name: "Tutti" },
+    { id: "sushi", name: "Sushi" },
+    { id: "sashimi", name: "Sashimi" },
+    { id: "rolls", name: "Rolls" },
+    { id: "specials", name: "Speciali" },
+    { id: "vegetarian", name: "Vegetariani" },
+  ];
+
+  useEffect(() => {
+    filterItems(activeCategory);
+  }, [activeCategory]);
+
+  const filterItems = (category) => {
+    setIsAnimating(true);
+
+    setTimeout(() => {
+      let filtered = [];
+
+      if (category === "all") {
+        // Flatten all categories into a single array
+        Object.values(menuData).forEach((categoryItems) => {
+          filtered = [...filtered, ...categoryItems];
+        });
+      } else {
+        // Get items from the selected category
+        filtered = menuData[category] || [];
+      }
+
+      setFilteredItems(filtered);
+      setIsAnimating(false);
+    }, 500);
+  };
+
   return (
     <section id="menu" className="menu">
       <div className="container">
         <div className="section-header" data-aos="fade-up">
           <h2>Il Nostro Menu</h2>
           <div className="separator"></div>
-          <p>Scopri la nostra selezione di piatti autentici e innovativi</p>
+          <p>Scopri le nostre specialità fusion italo-giapponesi</p>
         </div>
 
         <div
@@ -135,50 +163,51 @@ function Menu() {
           data-aos="fade-up"
           data-aos-delay="200"
         >
-          <ul>
-            {categories.map((category) => (
-              <li
-                key={category.id}
-                className={activeCategory === category.id ? "active" : ""}
-              >
-                <button onClick={() => setActiveCategory(category.id)}>
-                  {category.name}
-                </button>
-              </li>
-            ))}
-          </ul>
+          {categories.map((category) => (
+            <button
+              key={category.id}
+              className={`category-btn ${
+                activeCategory === category.id ? "active" : ""
+              }`}
+              onClick={() => setActiveCategory(category.id)}
+            >
+              {category.name}
+            </button>
+          ))}
         </div>
 
-        <div className="menu-items" data-aos="fade-up" data-aos-delay="300">
-          {menuItems[activeCategory].map((item) => (
-            <div
-              key={item.id}
-              className="menu-item"
-              data-aos="zoom-in"
-              data-aos-delay={100 * item.id}
-            >
+        <div
+          className={`menu-items ${isAnimating ? "animating" : ""}`}
+          data-aos="fade-up"
+          data-aos-delay="300"
+        >
+          {filteredItems.map((item) => (
+            <div key={item.id} className="menu-item">
               <div className="menu-item-image">
                 <img src={item.image} alt={item.name} />
-                {item.popular && (
-                  <span className="popular-badge">Popolare</span>
-                )}
+                {item.popular && <span className="popular-tag">Popolare</span>}
               </div>
               <div className="menu-item-info">
-                <h3>{item.name}</h3>
+                <div className="menu-item-header">
+                  <h3>{item.name}</h3>
+                  <span className="price">€{item.price}</span>
+                </div>
                 <p>{item.description}</p>
-                <div className="menu-item-price">€{item.price}</div>
+                <button className="order-btn">
+                  <i className="fas fa-plus"></i> Ordina
+                </button>
               </div>
             </div>
           ))}
         </div>
 
-        <div className="menu-cta" data-aos="fade-up" data-aos-delay="400">
+        <div className="menu-cta" data-aos="zoom-in" data-aos-delay="400">
           <a
-            href="/menu-completo.pdf"
-            className="btn btn-secondary"
+            href="menu-completo.pdf"
             target="_blank"
+            className="btn btn-secondary"
           >
-            Scarica Menu Completo
+            <i className="fas fa-download"></i> Scarica Menu Completo
           </a>
         </div>
       </div>

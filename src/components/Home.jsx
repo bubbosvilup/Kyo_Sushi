@@ -1,8 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-scroll";
 import "../styles/Home.css";
 
 function Home() {
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const heroBackground = document.querySelector(".hero-background");
+      const homeText = document.querySelector(".home-text");
+
+      if (heroBackground && homeText) {
+        // Effetto parallasse per lo sfondo
+        heroBackground.style.transform = `translateY(${
+          scrollPosition * 0.4
+        }px)`;
+        // Effetto di fade per il testo
+        homeText.style.transform = `translateY(${scrollPosition * 0.2}px)`;
+        homeText.style.opacity = 1 - scrollPosition * 0.003;
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <section id="home" className="home">
       <div className="hero-background"></div>
@@ -22,17 +43,19 @@ function Home() {
               to="menu"
               smooth={true}
               duration={800}
-              className="btn btn-primary"
+              className="btn btn-primary home-btn"
             >
-              Scopri il Menu
+              Il Menu
             </Link>
             <Link
+              id="book"
               to="contact"
               smooth={true}
               duration={800}
-              className="btn btn-secondary"
+              className="btn btn-secondary home-btn"
+              style={{ color: "#fff" }}
             >
-              Prenota un Tavolo
+              Prenota
             </Link>
           </div>
         </div>

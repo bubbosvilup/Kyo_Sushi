@@ -5,10 +5,13 @@ import "../styles/Header.css";
 function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrollPosition, setScrollPosition] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      const position = window.scrollY;
+      setScrollPosition(position);
+      setIsScrolled(position > 50);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -17,6 +20,17 @@ function Header() {
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
+    // Prevent scrolling when menu is open
+    if (!menuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  };
+
+  const closeMenu = () => {
+    setMenuOpen(false);
+    document.body.style.overflow = 'auto';
   };
 
   return (
@@ -44,7 +58,8 @@ function Header() {
                 to="home"
                 smooth={true}
                 duration={800}
-                onClick={() => setMenuOpen(false)}
+                onClick={closeMenu}
+                className={scrollPosition < 300 ? "active" : ""}
               >
                 Home
               </Link>
@@ -54,7 +69,8 @@ function Header() {
                 to="about"
                 smooth={true}
                 duration={800}
-                onClick={() => setMenuOpen(false)}
+                onClick={closeMenu}
+                className={scrollPosition >= 300 && scrollPosition < 1000 ? "active" : ""}
               >
                 Chi Siamo
               </Link>
@@ -64,7 +80,8 @@ function Header() {
                 to="menu"
                 smooth={true}
                 duration={800}
-                onClick={() => setMenuOpen(false)}
+                onClick={closeMenu}
+                className={scrollPosition >= 1000 && scrollPosition < 1800 ? "active" : ""}
               >
                 Menu
               </Link>
@@ -74,7 +91,8 @@ function Header() {
                 to="gallery"
                 smooth={true}
                 duration={800}
-                onClick={() => setMenuOpen(false)}
+                onClick={closeMenu}
+                className={scrollPosition >= 1800 && scrollPosition < 2600 ? "active" : ""}
               >
                 Galleria
               </Link>
@@ -84,7 +102,8 @@ function Header() {
                 to="testimonials"
                 smooth={true}
                 duration={800}
-                onClick={() => setMenuOpen(false)}
+                onClick={closeMenu}
+                className={scrollPosition >= 2600 && scrollPosition < 3200 ? "active" : ""}
               >
                 Recensioni
               </Link>
@@ -94,7 +113,8 @@ function Header() {
                 to="contact"
                 smooth={true}
                 duration={800}
-                onClick={() => setMenuOpen(false)}
+                onClick={closeMenu}
+                className={scrollPosition >= 3200 ? "active" : ""}
               >
                 Contatti
               </Link>
