@@ -10,7 +10,7 @@ function Testimonials() {
   const testimonials = [
     {
       id: 1,
-      name: "Marco Bianchi",
+      name: "Giulia Rossi",
       role: "Food Blogger",
       image: "images/testimonials/testimonial-1.jpg",
       text: "Kyo Sushi offre un'esperienza culinaria straordinaria. La fusione tra cucina giapponese e italiana è eseguita con maestria. Ogni piatto è un'opera d'arte, sia visivamente che nel gusto.",
@@ -18,7 +18,7 @@ function Testimonials() {
     },
     {
       id: 2,
-      name: "Giulia Rossi",
+      name: "Carlo Rossi",
       role: "Cliente Abituale",
       image: "images/testimonials/testimonial-2.jpg",
       text: "Frequento Kyo Sushi da quando ha aperto e non sono mai rimasta delusa. Il servizio è impeccabile e l'atmosfera è elegante ma accogliente. I loro roll speciali sono semplicemente deliziosi!",
@@ -38,22 +38,23 @@ function Testimonials() {
     if (!isAnimating) {
       setIsAnimating(true);
       setActiveIndex((prev) => (prev + 1) % testimonials.length);
-      
-      // Reset animation state after transition completes
+
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
       timeoutRef.current = setTimeout(() => {
         setIsAnimating(false);
-      }, 600);
+      }, 1000);
     }
   };
 
   const prevSlide = () => {
     if (!isAnimating) {
       setIsAnimating(true);
-      setActiveIndex((prev) => 
+      setActiveIndex((prev) =>
         prev === 0 ? testimonials.length - 1 : prev - 1
       );
-      
+
       // Reset animation state after transition completes
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
       timeoutRef.current = setTimeout(() => {
         setIsAnimating(false);
       }, 600);
@@ -64,33 +65,30 @@ function Testimonials() {
     if (!isAnimating && index !== activeIndex) {
       setIsAnimating(true);
       setActiveIndex(index);
-      
+
       // Reset animation state after transition completes
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
       timeoutRef.current = setTimeout(() => {
         setIsAnimating(false);
       }, 600);
     }
   };
 
+  // Modifica qui: rimuovi le dipendenze da useEffect per evitare ricreazioni dell'intervallo
   useEffect(() => {
-    // Auto play functionality
-    autoPlayRef.current = () => {
-      nextSlide();
-    };
-    
-    const play = () => {
-      autoPlayRef.current();
-    };
-    
-    const interval = setInterval(play, 5000);
-    
+    const interval = setInterval(() => {
+      if (!isAnimating) {
+        nextSlide();
+      }
+    }, 5000);
+
     return () => {
       clearInterval(interval);
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
       }
     };
-  }, [activeIndex, isAnimating]);
+  }, []); // Rimuovi le dipendenze per evitare ricreazioni dell'intervallo
 
   return (
     <section id="testimonials" className="testimonials">
@@ -101,8 +99,15 @@ function Testimonials() {
           <p>Le opinioni di chi ha vissuto l'esperienza Kyo Sushi</p>
         </div>
 
-        <div className="testimonials-slider" data-aos="fade-up" data-aos-delay="200">
-          <div className="testimonials-wrapper" style={{ transform: `translateX(-${activeIndex * 100}%)` }}>
+        <div
+          className="testimonials-slider"
+          data-aos="fade-up"
+          data-aos-delay="200"
+        >
+          <div
+            className="testimonials-wrapper"
+            style={{ transform: `translateX(-${activeIndex * 100}%)` }}
+          >
             {testimonials.map((testimonial) => (
               <div key={testimonial.id} className="testimonial-item">
                 <div className="testimonial-content">
@@ -142,7 +147,9 @@ function Testimonials() {
             {testimonials.map((_, index) => (
               <button
                 key={index}
-                className={`testimonial-dot ${index === activeIndex ? "active" : ""}`}
+                className={`testimonial-dot ${
+                  index === activeIndex ? "active" : ""
+                }`}
                 onClick={() => goToSlide(index)}
               ></button>
             ))}

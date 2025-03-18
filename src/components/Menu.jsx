@@ -6,6 +6,21 @@ function Menu() {
   const [filteredItems, setFilteredItems] = useState([]);
   const [isAnimating, setIsAnimating] = useState(false);
 
+  // Inizializza i filteredItems all'avvio
+  useEffect(() => {
+    // Carica tutti gli elementi all'inizio
+    let allItems = [];
+    Object.values(menuData).forEach((categoryItems) => {
+      allItems = [...allItems, ...categoryItems];
+    });
+    setFilteredItems(allItems);
+  }, []);
+
+  // Filtra gli elementi quando cambia la categoria
+  useEffect(() => {
+    filterItems(activeCategory);
+  }, [activeCategory]);
+
   const menuData = {
     sushi: [
       {
@@ -124,10 +139,6 @@ function Menu() {
     { id: "vegetarian", name: "Vegetariani" },
   ];
 
-  useEffect(() => {
-    filterItems(activeCategory);
-  }, [activeCategory]);
-
   const filterItems = (category) => {
     setIsAnimating(true);
 
@@ -146,6 +157,13 @@ function Menu() {
 
       setFilteredItems(filtered);
       setIsAnimating(false);
+      
+      // Aggiorna le animazioni AOS dopo il cambio di categoria
+      if (window.AOS) {
+        setTimeout(() => {
+          window.AOS.refresh();
+        }, 100);
+      }
     }, 500);
   };
 
@@ -178,11 +196,9 @@ function Menu() {
 
         <div
           className={`menu-items ${isAnimating ? "animating" : ""}`}
-          data-aos="fade-up"
-          data-aos-delay="300"
         >
           {filteredItems.map((item) => (
-            <div key={item.id} className="menu-item">
+            <div key={item.id} className="menu-item" data-aos="fade-up">
               <div className="menu-item-image">
                 <img src={item.image} alt={item.name} />
                 {item.popular && <span className="popular-tag">Popolare</span>}
